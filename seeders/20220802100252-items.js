@@ -7,7 +7,7 @@ const formatDate = dt.getFullYear() + '-' + ((dt.getMonth() > 9) ? '' : '0') + (
 
 module.exports = {
     async up(queryInterface, Sequelize) {
-        return queryInterface.bulkInsert('Items', [{
+        return queryInterface.bulkInsert('items', [{
                 title: "This is title item 1",
                 text: "This is text/description item 1",
                 deadline: formatDate,
@@ -81,6 +81,6 @@ module.exports = {
     },
 
     async down(queryInterface, Sequelize) {
-        return queryInterface.bulkDelete('Items', null, {});
+        return queryInterface.bulkDelete('items', null, {});
     }
 };

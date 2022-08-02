@@ -51,13 +51,13 @@ Probably could not be stable!
 
 ## Migrations models
 
-sequelize model:generate --name Users --attributes email:string,password:string
+sequelize model:generate --name users --attributes email:string,password:string
 
-sequelize model:generate --name ListUsers --attributes userId:integer,todoId:integer
+sequelize model:generate --name listUsers --attributes userId:integer,todoId:integer
 
-sequelize model:generate --name Todos --attributes title:string
+sequelize model:generate --name todos --attributes title:string
 
-sequelize model:generate --name Items --attributes title:string,text:text,deadline:string,userId:integer,type:string,todoId:integer
+sequelize model:generate --name items --attributes title:string,text:text,deadline:string,userId:integer,type:string,todoId:integer
 
 
 sequelize db:migrate
@@ -68,13 +68,13 @@ sequelize db:migrate:undo:all
 
 ## Table seeders
 
-sequelize seed:generate --name Users
+sequelize seed:generate --name users
 
-sequelize seed:generate --name ListUsers
+sequelize seed:generate --name listUsers
 
-sequelize seed:generate --name Todos
+sequelize seed:generate --name todos
 
-sequelize seed:generate --name Items
+sequelize seed:generate --name items
 
 
 sequelize db:seed:all
@@ -82,3 +82,58 @@ sequelize db:seed:all
 sequelize db:seed:undo
 
 sequelize db:seed:undo:all
+
+
+## Associations
+
+./src/services/models/* at the end of file
+
+
+
+## Rest Api
+
+#### Get and create users
+
+POST -> localhost:3030/users => Register user.
+
+body -> raw(json)
+
+Authorization -> none
+
+body:
+
+```
+{
+
+    "email":"marek@marek.com",
+    "password":"marek"
+
+}
+```
+
+---
+
+GET -> localhost:3030/users => Get current register user.
+
+body -> none
+
+Authorization -> Bearer <your_token>
+
+#### Authentication
+
+
+GET -> localhost:3030/authentication => Get token of registered user.
+
+body -> raw(json)-> none
+
+Authorization -> none
+
+body:	
+
+```
+{
+    "strategy": "local",
+    "email": "marek@marek.com",
+    "password": "marek"
+}
+```
