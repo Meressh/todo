@@ -6,16 +6,31 @@ import { HookReturn } from "sequelize/types/hooks";
 
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get("sequelizeClient");
-  const users = sequelizeClient.define(
-    "users",
+  const items = sequelizeClient.define(
+    "items",
     {
-      email: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
-      password: {
+      text: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      deadline: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      todoId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
@@ -29,11 +44,11 @@ export default function (app: Application): typeof Model {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (users as any).associate = function (models: any): void {
-    const { todos, items } = models;
-    users.belongsToMany(todos, { through: "ListUsers" });
-    users.hasMany(items);
+  (items as any).associate = function (models: any): void {
+    const { users, todos } = models;
+    items.belongsTo(todos);
+    items.belongsTo(users);
   };
 
-  return users;
+  return items;
 }
