@@ -1,18 +1,21 @@
-import { HooksObject } from '@feathersjs/feathers';
-import * as authentication from '@feathersjs/authentication';
+import { HooksObject } from "@feathersjs/feathers";
+import * as authentication from "@feathersjs/authentication";
+
+import itemsAssociation from "../../hooks/items-association";
+
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
 
 export default {
   before: {
-    all: [ authenticate('jwt') ],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    all: [],
+    find: [authenticate("jwt"), itemsAssociation()],
+    get: [itemsAssociation()],
+    create: [authenticate("jwt")],
+    update: [authenticate("jwt")],
+    patch: [authenticate("jwt")],
+    remove: [authenticate("jwt")],
   },
 
   after: {
@@ -22,7 +25,7 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -32,6 +35,6 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };

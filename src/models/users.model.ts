@@ -10,7 +10,7 @@ export default function (app: Application): typeof Model {
     "users",
     {
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
       },

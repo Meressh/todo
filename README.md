@@ -43,11 +43,9 @@ $ feathers help                           # Show all commands
 
 For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
 
-
 ## The main branch is dev branch!
 
 Probably could not be stable!
-
 
 ## Migrations models
 
@@ -58,7 +56,6 @@ sequelize model:generate --name listUsers --attributes userId:integer,todoId:int
 sequelize model:generate --name todos --attributes title:string
 
 sequelize model:generate --name items --attributes title:string,text:text,deadline:string,userId:integer,type:string,todoId:integer
-
 
 sequelize db:migrate
 
@@ -76,19 +73,15 @@ sequelize seed:generate --name todos
 
 sequelize seed:generate --name items
 
-
 sequelize db:seed:all
 
 sequelize db:seed:undo
 
 sequelize db:seed:undo:all
 
-
 ## Associations
 
 ./src/services/models/* at the end of file
-
-
 
 ## Rest Api
 
@@ -121,14 +114,13 @@ Authorization -> Bearer <your_token>
 
 #### Authentication
 
-
 GET -> localhost:3030/authentication => Get token of registered user.
 
 body -> raw(json)-> none
 
 Authorization -> none
 
-body:	
+body:
 
 ```
 {
@@ -137,3 +129,48 @@ body:
     "password": "marek"
 }
 ```
+
+#### Get and create todos
+
+POST -> localhost:3030/todos => Create todo list
+
+body -> raw(json)
+
+Authorization -> Bearer <your_token>
+
+body:
+
+```
+{
+
+    "title":"Some title 1",
+    "password":"marek"
+
+}
+```
+
+---
+
+GET -> localhost:3030/todos => Get todos list
+
+body -> none
+
+Authorization -> Bearer <your_token>
+
+GET -> localhost:3030/todos/:id => Get todos list
+
+localhost:3030/todos/1 -> Get todo where id == 1
+
+body -> none
+
+Authorization -> none
+
+## Validations & Constraints
+
+#### Constraints
+
+-> SQL level validation => ./src/models/*
+
+#### Validation
+
+-> javascript level validation =>

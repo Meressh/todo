@@ -32,7 +32,7 @@ module.exports = {
                 text: "This is text/description item 3",
                 deadline: formatDate,
                 userId: 1,
-                type: "active",
+                type: "canceled",
                 todoId: 2,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -52,7 +52,7 @@ module.exports = {
                 text: "This is text/description item 5",
                 deadline: formatDate,
                 userId: 2,
-                type: "active",
+                type: "canceled",
                 todoId: 2,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -62,7 +62,7 @@ module.exports = {
                 text: "This is text/description item 6",
                 deadline: formatDate,
                 userId: 2,
-                type: "active",
+                type: "no-active",
                 todoId: 3,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -72,7 +72,7 @@ module.exports = {
                 text: "This is text/description item 7",
                 deadline: formatDate,
                 userId: 2,
-                type: "active",
+                type: "no-active",
                 todoId: 3,
                 createdAt: new Date(),
                 updatedAt: new Date()
