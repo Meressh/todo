@@ -3,6 +3,7 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import { Application } from "../declarations";
 import { HookReturn } from "sequelize/types/hooks";
+import { Op } from "sequelize";
 
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get("sequelizeClient");
@@ -10,13 +11,29 @@ export default function (app: Application): typeof Model {
     "users",
     {
       email: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
           isEmail: true,
           notNull: true,
           notEmpty: true,
+          isUnique: function (value: string, next: any) {
+            users
+              .findAll({
+                where: {
+                  email: value,
+                  id: { [Op.ne]: this.id },
+                },
+              })
+              .then(function (result) {
+                if (result.length != 0) {
+                  next(new Error("Email address already in use!"));
+                }
+                next();
+              })
+              .catch((error) => console.log(error.message));
+          },
         },
       },
       password: {
