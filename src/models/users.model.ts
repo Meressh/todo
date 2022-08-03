@@ -13,10 +13,19 @@ export default function (app: Application): typeof Model {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
+        validate: {
+          isEmail: true,
+          notNull: true,
+          notEmpty: true,
+        },
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+        },
       },
     },
     {

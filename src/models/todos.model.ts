@@ -12,6 +12,10 @@ export default function (app: Application): typeof Model {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+        },
       },
     },
     {

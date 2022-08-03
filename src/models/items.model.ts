@@ -12,26 +12,55 @@ export default function (app: Application): typeof Model {
       title: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          len: [3, 255],
+        },
       },
       text: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          len: [3, 2000],
+        },
       },
       deadline: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+        },
       },
       type: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          isIn: [["active", "no-active", "canceled"]],
+        },
       },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          isInt: true,
+        },
       },
       todoId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          isInt: true,
+        },
       },
     },
     {

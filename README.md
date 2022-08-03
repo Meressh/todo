@@ -173,4 +173,4 @@ Authorization -> none
 
 #### Validation
 
--> javascript level validation =>
+-> javascript level validation => ./src/models/*
