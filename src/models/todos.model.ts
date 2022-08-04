@@ -30,7 +30,7 @@ export default function (app: Application): typeof Model {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (todos as any).associate = function (models: any): void {
     const { users, items } = models;
-    todos.belongsToMany(users, { through: "ListUsers" });
+    todos.belongsToMany(users, { through: "listUsers" });
     todos.hasMany(items);
   };
 
