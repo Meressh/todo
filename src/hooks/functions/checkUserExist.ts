@@ -1,18 +1,16 @@
-export default function checkUserExist(id: number, users: any): boolean {
-  let test = false;
+import { BadRequest } from "@feathersjs/errors";
 
-  users
-    .findAll({
-      where: {
-        id: id,
-      },
-    })
-    .then(async function (res: any) {
-      if (res.length === 0) {
-        test = await true;
-      }
-    })
-    .catch((error: any) => console.log(error.message));
+export default async function checkUserExist(
+  id: number,
+  users: any
+): Promise<void> {
+  const check = await users.findAll({
+    where: {
+      id: id,
+    },
+  });
 
-  return test;
+  if (check.length === 0) {
+    throw new BadRequest("User not found in database!");
+  }
 }

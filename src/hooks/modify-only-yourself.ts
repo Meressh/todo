@@ -7,7 +7,7 @@ import { Forbidden } from "@feathersjs/errors";
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     if (context.params.user == null || context.id == null) {
-      throw new Forbidden("Some error was made!");
+      throw new Forbidden("Users or id missing!");
     }
     const auth_user: number = context.params.user.id;
     const user_id = context.id;
