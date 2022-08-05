@@ -3,8 +3,9 @@ import itemsAssociation from "../../hooks/items-association";
 
 import * as authentication from "@feathersjs/authentication";
 
-import addToJunctionTable from "../../hooks/add-to-junction-table";
 import allowAnonymous from "../../hooks/allow-anonymous";
+
+import xssProtection from "../../hooks/xss-protection";
 
 // Don't remove this comment. It's needed to format import lines nicely.
 
@@ -23,9 +24,9 @@ export default {
       authenticate("jwt", "anonymous"),
       itemsAssociation(),
     ],
-    create: [authenticate("jwt")],
-    update: [authenticate("jwt")],
-    patch: [authenticate("jwt")],
+    create: [authenticate("jwt"), xssProtection()],
+    update: [authenticate("jwt"), xssProtection()],
+    patch: [authenticate("jwt"), xssProtection()],
     remove: [authenticate("jwt")],
   },
 

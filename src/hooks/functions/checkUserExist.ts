@@ -11,6 +11,6 @@ export default async function checkUserExist(
   });
 
   if (check.length === 0) {
-    throw new BadRequest("User not found in database!");
+    throw new BadRequest(`User with ID: ${id} not found in database!`);
   }
 }

@@ -2,20 +2,21 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 import { Hook, HookContext } from "@feathersjs/feathers";
 import checkUserExist from "./functions/checkUserExist";
-import { Json } from "sequelize/types/utils";
-
+import checkForDuplicates from "./functions/checkForDuplicates";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     const users = context.app.services.users.Model;
-    const sequelize_connected = context.app.get("sequelizeClient");
+    const listUser = context.app.services.listUsers.Model;
 
-    const add_users: number[] = context.data.users;
+    const add_users: number[] = context.data.userId;
+    const todo_id: number = context.data.todoId;
 
     // Check if user exist in database
     for (const id of add_users) {
       await checkUserExist(id, users);
-      await users.set;
+      await checkForDuplicates(id, todo_id, listUser);
     }
 
     return context;
