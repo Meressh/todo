@@ -1,6 +1,4 @@
-import { HooksObject } from "@feathersjs/feathers";
 import * as authentication from "@feathersjs/authentication";
-import xssProtection from "../../hooks/xss-protection-items";
 
 import xssProtectionItems from "../../hooks/xss-protection-items";
 import checkRelation from "../../hooks/check-relation";

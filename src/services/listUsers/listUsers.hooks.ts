@@ -1,4 +1,3 @@
-import { HooksObject } from "@feathersjs/feathers";
 import * as authentication from "@feathersjs/authentication";
 import { disallow } from "feathers-hooks-common";
 import addToJunctionTable from "../../hooks/add-to-junction-table";

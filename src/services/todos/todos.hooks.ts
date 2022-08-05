@@ -1,4 +1,3 @@
-import { HooksObject } from "@feathersjs/feathers";
 import itemsAssociation from "../../hooks/items-association";
 
 import * as authentication from "@feathersjs/authentication";

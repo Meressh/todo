@@ -1,4 +1,3 @@
-import { BadRequest } from "@feathersjs/errors";
 import escapeHTML from "escape-html";
 import DOMPurify from "isomorphic-dompurify";
 

@@ -2,7 +2,6 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 import { BadRequest } from "@feathersjs/errors";
 import { Hook, HookContext } from "@feathersjs/feathers";
-import { ListUsers } from "../services/listUsers/listUsers.class";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (options = {}): Hook => {
