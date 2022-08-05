@@ -1,18 +1,22 @@
-import { HooksObject } from '@feathersjs/feathers';
-import * as authentication from '@feathersjs/authentication';
+import { HooksObject } from "@feathersjs/feathers";
+import * as authentication from "@feathersjs/authentication";
+import xssProtection from "../../hooks/xss-protection-items";
+
+import xssProtectionItems from '../../hooks/xss-protection-items';
+
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
 
 export default {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [authenticate("jwt")],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [xssProtectionItems()],
+    update: [xssProtectionItems()],
+    patch: [xssProtectionItems()],
+    remove: [],
   },
 
   after: {
@@ -22,7 +26,7 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -32,6 +36,6 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };

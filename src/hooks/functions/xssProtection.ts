@@ -7,5 +7,6 @@ export default async function xssProtection(text: string): Promise<string> {
   const xssRemove = DOMPurify.sanitize(text);
   const escapedText = escapeHTML(xssRemove);
 
+  // You can also remove script with xssRemove and return;
   return escapedText;
 }
