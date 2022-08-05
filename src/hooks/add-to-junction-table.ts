@@ -8,7 +8,6 @@ import { Json } from "sequelize/types/utils";
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     const users = context.app.services.users.Model;
-    console.log(users.findOne());
     const sequelize_connected = context.app.get("sequelizeClient");
 
     const add_users: number[] = context.data.users;
@@ -16,10 +15,7 @@ export default (options = {}): Hook => {
     // Check if user exist in database
     for (const id of add_users) {
       await checkUserExist(id, users);
-
-      // sequelize_connected.query(`INSERT INTO listUsers (userId, todoId, cratedAt, updatedAt) VALUES( null,${id}, ${}, ${}, ${} )`).then((res: Json) => {
-      //   console.log(res);
-      // });
+      await users.set;
     }
 
     return context;

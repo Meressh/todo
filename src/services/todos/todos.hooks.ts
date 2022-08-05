@@ -33,7 +33,7 @@ export default {
     all: [],
     find: [],
     get: [],
-    create: [addToJunctionTable()],
+    create: [],
     update: [],
     patch: [],
     remove: [],
