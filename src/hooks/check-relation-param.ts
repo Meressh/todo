@@ -7,6 +7,7 @@ import { Hook, HookContext } from "@feathersjs/feathers";
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     const listUsers = context.app.services.listUsers.Model;
+
     const check = await listUsers.findAll({
       where: {
         userId: context.data.userId,
@@ -19,7 +20,6 @@ export default (options = {}): Hook => {
         `User with ID: ${context.data.userId} is not assigned to todo with ID: ${context.data.todoId}`
       );
     }
-
     return context;
   };
 };

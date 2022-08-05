@@ -6,20 +6,11 @@ import { Hook, HookContext } from "@feathersjs/feathers";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
-    const listUsers = context.app.services.listUsers.Model;
-    const check = await listUsers.findAll({
-      where: {
-        userId: context.data.userId,
-        todoId: context.data.todoId,
-      },
-    });
-
-    if (check.length === 0) {
+    if (context.data.userId || context.data.text) {
       throw new BadRequest(
-        `User with ID: ${context.data.userId} is not assigned to todo with ID: ${context.data.todoId}`
+        `You cannot change user ID and ID of todo list in this endpoint!`
       );
     }
-
     return context;
   };
 };

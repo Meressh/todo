@@ -1,6 +1,6 @@
 import * as authentication from "@feathersjs/authentication";
 import { disallow } from "feathers-hooks-common";
-import checkIntegrity from "../../hooks/check-integrity";
+import addToJunctionTable from "../../hooks/check-integrity";
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -10,7 +10,7 @@ export default {
     all: [authenticate("jwt")],
     find: [disallow()],
     get: [disallow()],
-    create: [checkIntegrity()], // We will send Todo id and usser id to create association between user and todo
+    create: [addToJunctionTable()], // We will send Todo id and usser id to create association between user and todo
     update: [disallow()],
     patch: [disallow()],
     remove: [disallow()], // remove is not allowed because we will remove data in other hooks -> users or todos
