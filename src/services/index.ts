@@ -1,8 +1,8 @@
-import { Application } from '../declarations';
-import users from './users/users.service';
-import todos from './todos/todos.service';
-import items from './items/items.service';
-import listUsers from './list-users/list-users.service';
+import { Application } from "../declarations";
+import users from "./users/users.service";
+import todos from "./todos/todos.service";
+import items from "./items/items.service";
+import listUsers from "./listUsers/listUsers.service";
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {

@@ -4,7 +4,6 @@ import itemsAssociation from "../../hooks/items-association";
 import * as authentication from "@feathersjs/authentication";
 
 import allowAnonymous from "../../hooks/allow-anonymous";
-
 import xssProtection from "../../hooks/xss-protection";
 
 // Don't remove this comment. It's needed to format import lines nicely.
