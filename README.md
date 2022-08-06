@@ -6,22 +6,52 @@
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
+Sequelize -> ORM, migrations, seeders
+
+DOMpurify -> Protection for XSS attacks
+
+Escape-html -> escape HTML, CSS...
+
+Testing -> mocha-shx
+
+Validation -> Sequelize
+
 ## Getting Started
 
-Getting up and running is as easy as 1, 2, 3.
+Getting up and running is easy.
 
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 2. Install your dependencies
 
-   ```
-   cd path/to/todo
-   npm install
-   ```
-3. Start your app
+```
+cd path/to/todo
+npm install
+```
+
+3. Connect database
+   In ./config/config.json and default.json edit your mysql credential
+4. Migrate migrations
 
    ```
-   npm start
+   sequelize db:migrate
    ```
+5. Run tests
+
+   ```
+   npm test
+   ```
+6. Seed database
+
+   ```
+   sequelize db:seed:all
+   ```
+7. Run app
+
+```
+npm run server 
+or 
+npm run dev
+```
 
 ## Testing
 
@@ -83,9 +113,23 @@ sequelize db:seed:undo:all
 
 ./src/services/models/* at the end of file
 
+## Validations & Constraints
+
+#### Constraints
+
+-> SQL level validation => ./src/models/*
+
+#### Validation
+
+-> javascript level validation => ./src/models/*
+
 ## Rest Api
 
-#### Get and create users
+Every create, update, patch has xssProtection hook.
+
+### Endpoint - Users
+
+#### Create
 
 POST -> localhost:3030/users => Register user.
 
@@ -104,9 +148,41 @@ body:
 }
 ```
 
----
+#### Get
 
-GET -> localhost:3030/users => Get current register user.
+GET -> localhost:3030/users => Get users.
+
+body -> none
+
+Authorization -> Bearer <your_token>
+
+#### Find
+
+GET -> localhost:3030/users/:id => Get current register user.
+
+body -> none
+
+Authorization -> Bearer <your_token>
+
+#### Update
+
+UPDATE -> localhost:3030/users/:id => Updates current user (replace whole model with request data) (You can only delete myself).
+
+body -> raw(json)non
+
+Authorization -> Bearer <your_token>
+
+#### Patch
+
+PATCH -> localhost:3030/users => Updates current user (only part of data for example only email) (You can only delete myself).
+
+body -> raw(json)non
+
+Authorization -> Bearer <your_token>
+
+#### Remove
+
+DELETE -> localhost:3030/users/:id => Remove current user (You can only delete myself).
 
 body -> none
 
@@ -130,9 +206,11 @@ body:
 }
 ```
 
-#### Get and create todos
+### Endpoint - Todo
 
-POST -> localhost:3030/todos => Create todo list
+#### Create
+
+POST -> localhost:3030/todos => Create todo.
 
 body -> raw(json)
 
@@ -143,34 +221,145 @@ body:
 ```
 {
 
-    "title":"Some title 1",
-    "password":"marek"
+    "title":"This is example title"
 
 }
 ```
 
----
+#### Get
 
-GET -> localhost:3030/todos => Get todos list
+GET -> localhost:3030/todos => Get todos. -> When Token provided also users data are included.
 
 body -> none
+
+Authorization -> Bearer <your_token> || none
+
+#### Find
+
+GET -> localhost:3030/todos/:id => Get todo. -> When Token provided also users data are includedGet current register use.
+
+body -> none
+
+Authorization -> Bearer <your_token> || none
+
+#### Update
+
+Disallowed()
+
+=> authenticate("jwt"), xssProtection(), -> For now the update  is disallowed -> Maybe add hook to check if user is admin or so.
+
+#### Patch
+
+Disallowed()
+
+=> authenticate("jwt"), xssProtection(), -> For now the patch  is disallowed -> Maybe add hook to check if user is admin or so.
+
+#### Remove
+
+Disallowed()
+
+=> authenticate("jwt"), xssProtection(), -> For now the remove  is disallowed -> Maybe add hook to check if user is admin or so.
+
+### Endpoint - list-user junction table
+
+#### Create
+
+POST -> localhost:3030/listUsers => Create todo.
+
+body -> raw(json)
 
 Authorization -> Bearer <your_token>
 
-GET -> localhost:3030/todos/:id => Get todos list
+body:
 
-localhost:3030/todos/1 -> Get todo where id == 1
+```
+{
+    "userId": 4,
+    "todoId": 6
+}
+```
+
+#### Get
+
+Disallowed()
+
+#### Find
+
+Disallowed()
+
+#### Update
+
+Disallowed()
+
+#### Patch
+
+Disallowed()
+
+#### Remove
+
+Disallowed()
+
+-> Remove is not allowed because we will remove data in other hooks -> users or todos
+
+### Endpoint - Items
+
+#### Create
+
+POST -> localhost:3030/items => Create item.
+
+body -> raw(json)
+
+Authorization -> Bearer `<your_token>`
+
+body:
+
+```
+{
+    "title": "<div><script>console.log('cross')</script>Title Items</div>",
+    "text": "<div><script>console.log('cross')</script>Text Items</div>",
+    "deadline": "2022-09-3 12:40:32",
+    "userId": 4,
+    "todoId": 2,
+    "type": "active"
+}
+```
+
+#### Get
+
+GET -> localhost:3030/items => Find items.
 
 body -> none
 
-Authorization -> none
+Authorization -> Bearer `<your_token>`
 
-## Validations & Constraints
+#### Find
 
-#### Constraints
+GET -> localhost:3030/items/:id => Find item.
 
--> SQL level validation => ./src/models/*
+body -> none
 
-#### Validation
+Authorization -> Bearer `<your_token>`
 
--> javascript level validation => ./src/models/*
+#### Update
+
+UPDATE -> localhost:3030/items/:id => Update item. -> check ./src/services/items/items.hook.ts for more details
+
+body -> raw(json)
+
+Authorization -> Bearer `<your_token>`
+
+#### Patch
+
+PATCH -> localhost:3030/items/:id => Patch item. Only type can be edited. Only user who belogns to todo can edit -> check ./src/services/items/items.hook.ts for more details
+
+body -> raw(json)
+
+Authorization -> Bearer `<your_token>`
+
+#### Remove
+
+DELETE -> localhost:3030/items/:id => Delete item. Only user who belogns to todo can remove item -> check ./src/services/items/items.hook.ts for more details
+
+body -> raw(json)
+
+Authorization -> Bearer `<your_token>`

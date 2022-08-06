@@ -25,7 +25,7 @@ export default {
       checkIfItemBelongsToUser(),
     ],
     patch: [
-      authenticate("jwt"),
+      authenticate("jwt"), // Edit item can only item (this todo has not included this option)
       xssProtectionItems(),
       disallowId(),
       checkIfUserbelongsToTodo(),

@@ -9,21 +9,21 @@ export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     const items = context.app.services.items.Model;
 
-    const checkId = await items.findAll({
-      where: {
-        id: context.id,
-      },
-    });
+    // const checkId = await items.findAll({
+    //   where: {
+    //     id: context.id,
+    //   },
+    // });
 
-    if (checkId.length === 0) {
-      throw new BadRequest(`Item with ID: ${context.id} does not exist!`);
-    }
+    // if (checkId.length === 0) {
+    //   throw new BadRequest(`Item with ID: ${context.id} does not exist!`);
+    // }
 
-    if (checkId[0].toJSON().userId != context.params.user?.id) {
-      throw new Forbidden(
-        "You can't modify Text and Title someone Todo Items!"
-      );
-    }
+    // if (checkId[0].toJSON().userId != context.params.user?.id) {
+    //   throw new Forbidden(
+    //     "You can't modify Text and Title someone Todo Items!"
+    //   );
+    // }
 
     let clean;
     if (context.data.title) {

@@ -28,8 +28,9 @@ export default (options = {}): Hook => {
 
     if (listUser.length === 0) {
       throw new BadRequest(
-        `Item with ID: ${context.id} is not connected to Todo list with ID ${
+        `You are not connected with this Todo list with ID: ${
           getItem[0].toJSON().todoId
+        }
         }!`
       );
     }

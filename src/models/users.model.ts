@@ -32,7 +32,7 @@ export default function (app: Application): typeof Model {
                 }
                 next();
               })
-              .catch((error) => console.log(error.message));
+              .catch((error) => new Error(error));
           },
         },
       },
