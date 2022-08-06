@@ -4,6 +4,7 @@ import * as authentication from "@feathersjs/authentication";
 
 import allowAnonymous from "../../hooks/allow-anonymous";
 import xssProtection from "../../hooks/xss-protection";
+import { disallow } from "feathers-hooks-common";
 
 // Don't remove this comment. It's needed to format import lines nicely.
 
@@ -23,9 +24,9 @@ export default {
       itemsAssociation(),
     ],
     create: [authenticate("jwt"), xssProtection()],
-    update: [authenticate("jwt"), xssProtection()],
-    patch: [authenticate("jwt"), xssProtection()],
-    remove: [authenticate("jwt")],
+    update: [disallow()], // authenticate("jwt"), xssProtection(), -> For now the update  is disallowed -> Maybe add hook to check if user is admin or so.
+    patch: [disallow()], // authenticate("jwt"), xssProtection(), - > For now the patch is disallowed -> Maybe add hook to check if user is admin or so.
+    remove: [disallow()], // authenticate("jwt"), -> For now the remove is disallowed -> Maybe add hook to check if user is admin or so.
   },
 
   after: {
