@@ -16,6 +16,8 @@ Testing -> mocha-shx
 
 Validation -> Sequelize
 
+Emails -> nodemailer
+
 ## Getting Started
 
 Getting up and running is easy.
@@ -264,7 +266,7 @@ Disallowed()
 
 #### Create
 
-POST -> localhost:3030/listUsers => Create todo.
+POST -> localhost:3030/listUsers => Create todo. Also send email to user via provided ID.
 
 body -> raw(json)
 
