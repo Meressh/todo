@@ -1,6 +1,7 @@
 import * as authentication from "@feathersjs/authentication";
 import { disallow } from "feathers-hooks-common";
 import checkIntegrity from "../../hooks/check-integrity";
+import sendEmail from "../../hooks/send-email";
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
@@ -20,7 +21,7 @@ export default {
     all: [],
     find: [disallow()],
     get: [disallow()],
-    create: [],
+    create: [sendEmail()],
     update: [disallow()],
     patch: [disallow()],
     remove: [disallow()],
