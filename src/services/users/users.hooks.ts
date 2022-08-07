@@ -1,6 +1,8 @@
 import * as feathersAuthentication from "@feathersjs/authentication";
 import * as local from "@feathersjs/authentication-local";
 import modifyOnlyYourself from "../../hooks/modify-only-yourself";
+import { disallow } from "feathers-hooks-common";
+
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = feathersAuthentication.hooks;
@@ -22,7 +24,7 @@ export default {
       authenticate("jwt"),
       modifyOnlyYourself(),
     ],
-    remove: [authenticate("jwt"), modifyOnlyYourself()],
+    remove: [disallow()], // authenticate("jwt"), modifyOnlyYourself(), -> For now is disallowed
   },
 
   after: {
