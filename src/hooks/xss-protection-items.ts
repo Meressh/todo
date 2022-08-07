@@ -1,13 +1,12 @@
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
-import { BadRequest, Forbidden } from "@feathersjs/errors";
 import { Hook, HookContext } from "@feathersjs/feathers";
 import xssProtection from "./functions/xssProtection";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
-    const items = context.app.services.items.Model;
+    // const items = context.app.services.items.Model;
 
     // const checkId = await items.findAll({
     //   where: {

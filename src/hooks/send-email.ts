@@ -23,7 +23,7 @@ export default (options = {}): Hook => {
       },
     });
 
-    createTran.verify(function (error, success) {
+    createTran.verify(function (error) {
       if (error) {
         console.log(error);
       } else {

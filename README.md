@@ -1,4 +1,4 @@
-# todo
+# Todo
 
 > Todo List
 
@@ -37,23 +37,29 @@ npm install
    ```
    sequelize db:migrate
    ```
-5. Run tests
+5. Edit smtp credentials
+   Optional
+
+   in ./src/hooks/send-email.ts
+6. Run tests
 
    ```
    npm test
    ```
-6. Seed database
+7. Seed database
 
    ```
    sequelize db:seed:all
    ```
-7. Run app
+8. Run app
 
 ```
-npm run server 
+npm run start
 or 
 npm run dev
 ```
+
+npm run start -> ./lib
 
 ## Testing
 
