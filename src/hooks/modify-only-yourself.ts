@@ -10,8 +10,6 @@ export default (options = {}): Hook => {
       throw new Forbidden("Users or id missing!");
     }
     const auth_user: number = context.params.user.id;
-    console.log(context.params.user.id);
-    console.log(context.id);
     const user_id = context.id;
 
     if (auth_user != user_id) {
