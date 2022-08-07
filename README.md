@@ -274,6 +274,8 @@ Disallowed()
 
 POST -> localhost:3030/listUsers => Create todo. Also send email to user via provided ID.
 
+-> You can insert more than one value!
+
 body -> raw(json)
 
 Authorization -> Bearer <your_token>

@@ -6,7 +6,7 @@ import { Hook, HookContext } from "@feathersjs/feathers";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
-    if (context.data.userId || context.data.text) {
+    if (context.data.userId || context.data.todoId) {
       throw new BadRequest(
         `You cannot change user ID and ID of todo list in this endpoint!`
       );

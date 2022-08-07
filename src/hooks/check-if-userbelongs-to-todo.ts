@@ -30,8 +30,7 @@ export default (options = {}): Hook => {
       throw new BadRequest(
         `You are not connected with this Todo list with ID: ${
           getItem[0].toJSON().todoId
-        }
-        }!`
+        }`
       );
     }
 
